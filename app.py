@@ -38,7 +38,7 @@ def create():
         content = request.form['content']
 
         if not title:
-            flash('Title is required!')
+            flash(u'Title is required!', 'warning')
         else:
             conn = get_db_connection()
             conn.execute('INSERT INTO posts (title, content) VALUES (?, ?)',
@@ -78,7 +78,7 @@ def delete(id):
     conn.execute('DELETE FROM posts WHERE id = ?', (id,))
     conn.commit()
     conn.close()
-    flash('"{}" was successfully deleted!'.format(post['title']))
+    flash('"{}" was successfully deleted!'.format(post['title']), category="success")
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
